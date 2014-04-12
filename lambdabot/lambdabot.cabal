@@ -35,8 +35,7 @@ extra-source-files:     src/Modules.hs
                         Changelog
                         README.md
 
-data-files:             scripts/online.rc,
-                        State/haddock,
+data-files:             State/haddock,
                         State/Pristine.hs.706,
                         State/Pristine.hs.708,
                         State/Pristine.hs.default,
@@ -60,4 +59,7 @@ executable lambdabot
                         lambdabot-novelty-plugins    >= 5.1 && < 5.2,
                         lambdabot-reference-plugins  >= 5.1 && < 5.2,
                         lambdabot-social-plugins     >= 5.1 && < 5.2,
-                        mtl                          >= 2
+                        mtl                          >= 2,
+                        -- more runtime dependencies
+                        lens,
+                        data-default
