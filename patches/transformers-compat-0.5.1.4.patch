@@ -1,0 +1,18 @@
+commit e184fe7d7cdeb148e0317a3fcb7494e78fe39a3e
+Author: Bertram Felgenhauer <int-e@gmx.de>
+Date:   Sun Aug 21 23:34:52 2016 +0200
+
+    safehaskell tweak
+
+diff --git a/src/Control/Monad/Trans/Instances.hs b/src/Control/Monad/Trans/Instances.hs
+index 75b4735..fb21d6c 100644
+--- a/src/Control/Monad/Trans/Instances.hs
++++ b/src/Control/Monad/Trans/Instances.hs
+@@ -11,7 +11,6 @@
+ 
+ # if __GLASGOW_HASKELL__ >= 702
+ {-# LANGUAGE DeriveGeneric #-}
+-{-# LANGUAGE Trustworthy #-}
+ # endif
+ 
+ # if __GLASGOW_HASKELL__ >= 706

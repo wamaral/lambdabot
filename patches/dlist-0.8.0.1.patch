@@ -1,0 +1,18 @@
+commit 9718e925cbfe03fdb77c029f901c0c928b6a94f2
+Author: Bertram Felgenhauer <int-e@gmx.de>
+Date:   Sun Aug 21 20:56:50 2016 +0200
+
+    Safehaskell tweak
+
+diff --git a/Data/DList.hs b/Data/DList.hs
+index 69b8866..558717e 100644
+--- a/Data/DList.hs
++++ b/Data/DList.hs
+@@ -5,6 +5,7 @@
+ 
+ #if defined(__GLASGOW_HASKELL__) && __GLASGOW_HASKELL__ >= 708
+ {-# LANGUAGE PatternSynonyms, ViewPatterns #-}
++{-# LANGUAGE Trustworthy #-}
+ #endif
+ 
+ -----------------------------------------------------------------------------

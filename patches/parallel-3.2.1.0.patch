@@ -1,0 +1,26 @@
+commit eda16f15fd2da5cfab056ad441251deec01d2722
+Author: Bertram Felgenhauer <int-e@gmx.de>
+Date:   Mon Aug 22 03:22:09 2016 +0200
+
+    SafeHaskell tweaks
+
+diff --git a/Control/Parallel.hs b/Control/Parallel.hs
+index f882104..115b76b 100644
+--- a/Control/Parallel.hs
++++ b/Control/Parallel.hs
+@@ -1,4 +1,5 @@
+ {-# LANGUAGE CPP #-}
++{-# LANGUAGE Trustworthy #-}
+ 
+ -----------------------------------------------------------------------------
+ -- |
+diff --git a/Control/Parallel/Strategies.hs b/Control/Parallel/Strategies.hs
+index bded495..860ca7c 100644
+--- a/Control/Parallel/Strategies.hs
++++ b/Control/Parallel/Strategies.hs
+@@ -1,4 +1,5 @@
+ {-# LANGUAGE BangPatterns, CPP, MagicHash, UnboxedTuples #-}
++{-# LANGUAGE Trustworthy #-}
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Parallel.Strategies

@@ -1,0 +1,288 @@
+commit 3083c9aa3f53db8c7e2f1a7ed10e0b0008bf40dd
+Author: Bertram Felgenhauer <int-e@gmx.de>
+Date:   Mon Aug 22 03:43:35 2016 +0200
+
+    SafeHaskell tweaks
+
+diff --git a/src/Control/Lens/Fold.hs b/src/Control/Lens/Fold.hs
+index e34600d..b186ef8 100644
+--- a/src/Control/Lens/Fold.hs
++++ b/src/Control/Lens/Fold.hs
+@@ -12,9 +12,7 @@
+ #define MIN_VERSION_reflection(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ 
+ {-# OPTIONS_GHC -fno-warn-orphans #-}
+ ----------------------------------------------------------------------------
+diff --git a/src/Control/Lens/Getter.hs b/src/Control/Lens/Getter.hs
+index 0be4c4b..64a495b 100644
+--- a/src/Control/Lens/Getter.hs
++++ b/src/Control/Lens/Getter.hs
+@@ -8,9 +8,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ 
+ #if __GLASGOW_HASKELL__ && __GLASGOW_HASKELL__ >= 704
+ {-# LANGUAGE NoPolyKinds #-}
+diff --git a/src/Control/Lens/Internal/Bazaar.hs b/src/Control/Lens/Internal/Bazaar.hs
+index 9b9e635..79bc592 100644
+--- a/src/Control/Lens/Internal/Bazaar.hs
++++ b/src/Control/Lens/Internal/Bazaar.hs
+@@ -11,6 +11,8 @@
+ {-# OPTIONS_GHC -fno-warn-redundant-constraints #-}
+ #endif
+ 
++{-# LANGUAGE Trustworthy #-}
++
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Internal.Bazaar
+diff --git a/src/Control/Lens/Internal/Coerce.hs b/src/Control/Lens/Internal/Coerce.hs
+index 1d50a0a..6fbf03e 100644
+--- a/src/Control/Lens/Internal/Coerce.hs
++++ b/src/Control/Lens/Internal/Coerce.hs
+@@ -6,7 +6,6 @@
+ 
+ #if (MIN_VERSION_profunctors(4,4,0)) && __GLASGOW_HASKELL__ >= 708
+ #define USE_COERCE
+-{-# LANGUAGE Trustworthy #-}
+ {-# LANGUAGE RankNTypes #-}
+ {-# LANGUAGE ScopedTypeVariables #-}
+ #else
+diff --git a/src/Control/Lens/Internal/Context.hs b/src/Control/Lens/Internal/Context.hs
+index be4d233..8afec75 100644
+--- a/src/Control/Lens/Internal/Context.hs
++++ b/src/Control/Lens/Internal/Context.hs
+@@ -12,6 +12,8 @@
+ #if __GLASGOW_HASKELL__ >= 711
+ {-# OPTIONS_GHC -fno-warn-redundant-constraints #-}
+ #endif
++
++{-# LANGUAGE Trustworthy #-}
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Internal.Context
+diff --git a/src/Control/Lens/Internal/Indexed.hs b/src/Control/Lens/Internal/Indexed.hs
+index 39c7ad9..9e14c10 100644
+--- a/src/Control/Lens/Internal/Indexed.hs
++++ b/src/Control/Lens/Internal/Indexed.hs
+@@ -10,9 +10,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ 
+ -----------------------------------------------------------------------------
+ -- |
+diff --git a/src/Control/Lens/Internal/Magma.hs b/src/Control/Lens/Internal/Magma.hs
+index 6e67dbc..fe61192 100644
+--- a/src/Control/Lens/Internal/Magma.hs
++++ b/src/Control/Lens/Internal/Magma.hs
+@@ -10,6 +10,7 @@
+ #if __GLASGOW_HASKELL__ >= 707
+ {-# LANGUAGE RoleAnnotations #-}
+ #endif
++{-# LANGUAGE Trustworthy #-}
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Internal.Magma
+diff --git a/src/Control/Lens/Internal/Prism.hs b/src/Control/Lens/Internal/Prism.hs
+index 904308d..824fe52 100644
+--- a/src/Control/Lens/Internal/Prism.hs
++++ b/src/Control/Lens/Internal/Prism.hs
+@@ -1,4 +1,5 @@
+ {-# LANGUAGE CPP #-}
++{-# LANGUAGE Trustworthy #-}
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Internal.Prism
+diff --git a/src/Control/Lens/Internal/Setter.hs b/src/Control/Lens/Internal/Setter.hs
+index 1f203e6..601cafe 100644
+--- a/src/Control/Lens/Internal/Setter.hs
++++ b/src/Control/Lens/Internal/Setter.hs
+@@ -4,9 +4,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ 
+ -----------------------------------------------------------------------------
+ -- |
+diff --git a/src/Control/Lens/Internal/Zoom.hs b/src/Control/Lens/Internal/Zoom.hs
+index 7f16d80..2ca4228 100644
+--- a/src/Control/Lens/Internal/Zoom.hs
++++ b/src/Control/Lens/Internal/Zoom.hs
+@@ -3,10 +3,6 @@
+ {-# LANGUAGE FlexibleContexts #-}
+ {-# LANGUAGE UndecidableInstances #-}
+ 
+-#if __GLASGOW_HASKELL__ < 708
+-{-# LANGUAGE Trustworthy #-}
+-#endif
+-
+ {-# OPTIONS_GHC -fno-warn-orphans -fno-warn-warnings-deprecations #-}
+ -----------------------------------------------------------------------------
+ -- |
+diff --git a/src/Control/Lens/Iso.hs b/src/Control/Lens/Iso.hs
+index 547ee34..55d3ed5 100644
+--- a/src/Control/Lens/Iso.hs
++++ b/src/Control/Lens/Iso.hs
+@@ -17,9 +17,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Iso
+@@ -87,10 +85,6 @@ module Control.Lens.Iso
+   , bimapping
+   , firsting
+   , seconding
+-#if __GLASGOW_HASKELL__ >= 710
+-  -- * Coercions
+-  , coerced
+-#endif
+   ) where
+ 
+ import Control.Lens.Equality (simple)
+diff --git a/src/Control/Lens/Lens.hs b/src/Control/Lens/Lens.hs
+index f7cacbc..5463c29 100644
+--- a/src/Control/Lens/Lens.hs
++++ b/src/Control/Lens/Lens.hs
+@@ -14,9 +14,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ -------------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Lens
+diff --git a/src/Control/Lens/Level.hs b/src/Control/Lens/Level.hs
+index 345b8f2..ad02d44 100644
+--- a/src/Control/Lens/Level.hs
++++ b/src/Control/Lens/Level.hs
+@@ -1,14 +1,11 @@
+ {-# LANGUAGE CPP #-}
+ {-# LANGUAGE Rank2Types #-}
+ {-# LANGUAGE FlexibleContexts #-}
+-
+ #ifndef MIN_VERSION_profunctors
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Level
+diff --git a/src/Control/Lens/Review.hs b/src/Control/Lens/Review.hs
+index 62abb7d..61595ac 100644
+--- a/src/Control/Lens/Review.hs
++++ b/src/Control/Lens/Review.hs
+@@ -5,9 +5,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ -------------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Review
+diff --git a/src/Control/Lens/Setter.hs b/src/Control/Lens/Setter.hs
+index 20b025d..033c5cf 100644
+--- a/src/Control/Lens/Setter.hs
++++ b/src/Control/Lens/Setter.hs
+@@ -8,9 +8,7 @@
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+ 
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Setter
+diff --git a/src/Control/Lens/Zoom.hs b/src/Control/Lens/Zoom.hs
+index 85f4ba7..2b51be8 100644
+--- a/src/Control/Lens/Zoom.hs
++++ b/src/Control/Lens/Zoom.hs
+@@ -13,11 +13,7 @@
+ #ifndef MIN_VERSION_profunctors
+ #define MIN_VERSION_profunctors(x,y,z) 1
+ #endif
+-
+-#if __GLASGOW_HASKELL__ < 708 || !(MIN_VERSION_profunctors(4,4,0))
+ {-# LANGUAGE Trustworthy #-}
+-#endif
+-
+ -------------------------------------------------------------------------------
+ -- |
+ -- Module      :  Control.Lens.Zoom
+diff --git a/src/Control/Parallel/Strategies/Lens.hs b/src/Control/Parallel/Strategies/Lens.hs
+index 4322796..16fcbf1 100644
+--- a/src/Control/Parallel/Strategies/Lens.hs
++++ b/src/Control/Parallel/Strategies/Lens.hs
+@@ -1,7 +1,4 @@
+ {-# LANGUAGE CPP #-}
+-#ifdef TRUSTWORTHY
+-{-# LANGUAGE Trustworthy #-}
+-#endif
+ #ifndef MIN_VERSION_parallel
+ #define MIN_VERSION_parallel(x,y,z) (defined(__GLASGOW_HASKELL__) && __GLASGOW_HASKELL > 700)
+ #endif
+diff --git a/src/Data/HashSet/Lens.hs b/src/Data/HashSet/Lens.hs
+index 6dbd278..0933b49 100644
+--- a/src/Data/HashSet/Lens.hs
++++ b/src/Data/HashSet/Lens.hs
+@@ -1,8 +1,5 @@
+ {-# LANGUAGE CPP #-}
+ {-# LANGUAGE Rank2Types #-}
+-#ifdef TRUSTWORTHY
+-{-# LANGUAGE Trustworthy #-}
+-#endif
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Data.HashSet.Lens
+diff --git a/src/Data/Text/Lazy/Lens.hs b/src/Data/Text/Lazy/Lens.hs
+index b650f58..a7330df 100644
+--- a/src/Data/Text/Lazy/Lens.hs
++++ b/src/Data/Text/Lazy/Lens.hs
+@@ -5,6 +5,7 @@
+ {-# LANGUAGE PatternSynonyms #-}
+ {-# LANGUAGE ViewPatterns #-}
+ #endif
++{-# LANGUAGE Trustworthy #-}
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Data.Text.Lazy.Lens
+diff --git a/src/Data/Text/Strict/Lens.hs b/src/Data/Text/Strict/Lens.hs
+index 9da40f9..3dcf61c 100644
+--- a/src/Data/Text/Strict/Lens.hs
++++ b/src/Data/Text/Strict/Lens.hs
+@@ -4,6 +4,7 @@
+ {-# LANGUAGE PatternSynonyms #-}
+ {-# LANGUAGE ViewPatterns #-}
+ #endif
++{-# LANGUAGE Trustworthy #-}
+ -----------------------------------------------------------------------------
+ -- |
+ -- Module      :  Data.Text.Strict.Lens
