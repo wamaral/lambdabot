@@ -1,0 +1,30 @@
+flags: {}
+extra-package-dbs: []
+packages:
+- lambdabot/
+- lambdabot-novelty-plugins/
+- lambdabot-irc-plugins/
+- lambdabot-social-plugins/
+- lambdabot-haskell-plugins/
+- lambdabot-core/
+- lambdabot-reference-plugins/
+- lambdabot-trusted/
+- lambdabot-misc-plugins/
+- lambdabot-slack
+extra-deps:
+- IOSpec-0.3
+- QuickCheck-safe-0.1.0.1
+- Stream-0.4.7.2
+- arrows-0.4.4.1
+- brainfuck-0.1.0.3
+- haskell-src-exts-1.18.2
+- haskell-src-exts-simple-1.18.0.1.1
+- hoogle-5.0.4
+- html-entities-1.1.2
+- lazysmallcheck-0.6
+- mueval-0.9.3
+- prim-uniq-0.1.0.1
+- show-0.6
+- slack-api-0.10
+- unlambda-0.1.4.2
+resolver: lts-7.10

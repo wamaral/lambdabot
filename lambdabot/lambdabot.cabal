@@ -49,6 +49,7 @@ source-repository head
 executable lambdabot
   hs-source-dirs:       src
   main-is:              Main.hs
+  other-modules:        Modules
 
   ghc-options:          -Wall -threaded
   build-depends:        base                         >= 3 && < 5,
