@@ -391,4 +391,4 @@ lineify _ msg = do
                 breaks  = filter (not . isAlphaNum . last . fst) $ drop 1 $
                                   take n $ zip (inits bs) (tails bs)
                 (cs,ds) = last $ (take n bs, drop n bs): breaks
-                n = 10
+                n = 40

@@ -41,7 +41,7 @@ splitFirstWord xs = (w, dropWhile isSpace xs')
 -- end if necessary.
 limitStr :: Int -> String -> String
 limitStr n s = let (b, t) = splitAt n s in
-           if null t then b else take (n-3) b ++ "..."
+           if null t then b else take (n-1) b ++ "…"
 
 -- | Form a list of terms using a single conjunction. Example:
 --

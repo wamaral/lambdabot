@@ -130,7 +130,7 @@ ircPrivmsg :: Nick      -- ^ The channel\/user.
 ircPrivmsg who msg = do
     sendlines <- applyOutputFilters who msg
     w <- getConfig textWidth
-    mapM_ (\s -> ircPrivmsg' who (take w s)) (take 10 sendlines)
+    mapM_ (\s -> ircPrivmsg' who (take w s)) (take 40 sendlines)
 
 -- A raw send version (bypasses output filters)
 ircPrivmsg' :: Nick -> String -> LB ()
