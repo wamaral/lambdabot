@@ -8,7 +8,6 @@ import Lambdabot.Plugin.Haskell
 import Modules      (modulesInfo)
 import qualified Paths_lambdabot as P
 
-import Control.Applicative
 import Control.Monad
 import Control.Monad.Identity
 import Data.Char

@@ -42,7 +42,7 @@ instance Message IrcMessage where
     nick                = liftM2 Nick ircMsgServer (takeWhile (/= '!') . ircMsgPrefix)
     server              = ircMsgServer
     fullName            = dropWhile (/= '!') . ircMsgPrefix
-    channels msg        = 
+    channels msg        =
       let cstr = head $ ircMsgParams msg
         in map (Nick (server msg)) $
            map (\(x:xs) -> if x == ':' then xs else x:xs) (splitOn "," cstr)
@@ -55,7 +55,7 @@ mkMessage :: String -- ^ Server
           -> [String] -- ^ Parameters
           -> IrcMessage -- ^ Returns: The created message
 
-mkMessage svr cmd params = IrcMessage 
+mkMessage svr cmd params = IrcMessage
     { ircMsgServer = svr
     , ircMsgPrefix = ""
     , ircMsgCommand = cmd
@@ -92,7 +92,7 @@ privmsg who msg = if action then mk [nName who, ':':(chr 0x1):("ACTION " ++ clea
 -- | 'codepage' creates a server CODEPAGE message. The input string given is the
 --   codepage name for current session.
 codepage :: String -> String -> IrcMessage
-codepage svr codepage = mkMessage svr "CODEPAGE" [' ':codepage]
+codepage svr cp = mkMessage svr "CODEPAGE" [' ':cp]
 
 -- | 'quit' creates a server QUIT message. The input string given is the
 --   quit message, given to other parties when leaving the network.
@@ -118,4 +118,3 @@ pass svr pwd = mkMessage svr "PASS" [pwd]
 
 setNick :: Nick -> IrcMessage
 setNick nick_ = mkMessage (nTag nick_) "NICK" [nName nick_]
-
