@@ -54,7 +54,7 @@ mkSlackConfig :: String -> SlackConfig
 mkSlackConfig apiToken = SlackConfig { _slackApiToken = apiToken }
 
 isCommand :: String -> Bool
-isCommand cmd = any (\c -> c `isPrefixOf` cmd) ["!", "?", ">"]
+isCommand cmd = any (\c -> c `isPrefixOf` cmd) ["!", "?", "|"]
 
 getCommand :: String -> Maybe String
 getCommand cmd = if isCommand cmd then Just cmd else Nothing
@@ -65,7 +65,7 @@ slackBot :: SlackBot a
 slackBot (Message cid _ someMessage _ _ _) = case command of
   Just cmd -> do
     resp <- liftIO (pack . decodeString <$> lambdabot cmd)
-    sendMessage cid ("```" <> resp <> "```")
+    sendMessage cid ("```\n" <> resp <> "```")
   Nothing -> return ()
   where
     command = getCommand $ decodeHtml someMessage

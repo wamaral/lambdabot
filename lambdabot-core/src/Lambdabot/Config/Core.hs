@@ -31,7 +31,7 @@ import Data.Version
 -------------------------------------
 -- Core configuration variables
 
-config "commandPrefixes"    [t| [String]                |] [| ["@", "?"]    |]
+config "commandPrefixes"    [t| [String]                |] [| ["!", "?"]    |]
 config "disabledCommands"   [t| [String]                |] [| []            |]
 config "editDistanceLimit"  [t| Int                     |] [| 3 :: Int      |]
 config "enableInsults"      [t| Bool                    |] [| True          |]
@@ -43,7 +43,7 @@ config "dataDir"            [t| FilePath                |] [| "."           |]
 config "lbVersion"          [t| Version                 |] [| Version [] [] |]
 
 -- IRC maximum msg length, minus a bit for safety.
-config "textWidth"          [t| Int                     |] [| 200 :: Int    |]
+config "textWidth"          [t| Int                     |] [| 2000 :: Int    |]
 
 -- basic logging.  for more complex setups, configure directly using System.Log.Logger
 config "replaceRootLogger"  [t| Bool                    |] [| True                        |]

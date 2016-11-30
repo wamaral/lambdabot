@@ -21,7 +21,7 @@ morePlugin = newModule
 
     , moduleCmds = return
         [ (command "more")
-            { help = say "@more. Return more output from the bot buffer."
+            { help = say "!more. Return more output from the bot buffer."
             , process = \_ -> do
                 target <- getTarget
                 morestate <- readPS target
@@ -43,6 +43,6 @@ moreFilter target msglines = do
     writePS target $ if null morelines then Nothing else Just morelines
     return $ thislines ++ if null morelines
                           then []
-                          else ['[':shows (length morelines) " @more lines]"]
+                          else ['[':shows (length morelines) " !more lines]"]
 
-    where maxLines = 5 -- arbitrary, really
+    where maxLines = 150 -- arbitrary, really

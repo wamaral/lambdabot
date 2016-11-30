@@ -106,7 +106,7 @@ timeReply :: IrcMessage -> IrcMessage
 timeReply msg = msg
     { ircMsgCommand = "PRIVMSG"
     , ircMsgParams  = [head (ircMsgParams msg)
-                   ,":@localtime-reply " ++ (nName $ nick msg) ++ ":" ++
+                   ,":!localtime-reply " ++ (nName $ nick msg) ++ ":" ++
                       (init $ drop 7 (last (ircMsgParams msg))) ]
     }
 

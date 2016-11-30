@@ -71,7 +71,7 @@ feed msg = do
     cmdPrefix <- fmap head (getConfig commandPrefixes)
     let msg' = case msg of
             '>':xs -> cmdPrefix ++ "run " ++ xs
-            '!':xs -> xs
+            -- '!':xs -> xs
             _      -> cmdPrefix ++ dropWhile (== ' ') msg
     -- note that `msg'` is unicode, but lambdabot wants utf-8 lists of bytes
     lb . void . timeout (15 * 1000 * 1000) . received $

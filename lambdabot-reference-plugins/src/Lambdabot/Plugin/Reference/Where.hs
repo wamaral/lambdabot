@@ -46,7 +46,7 @@ wherePlugin = newModule
 doCmd :: String -> String -> Cmd Where ()
 doCmd cmd rest = (say =<<) . withMS $ \factFM writer ->
     case words rest of
-        []         -> return "@where <key>, return element associated with key"
+        []         -> return "!where <key>, return element associated with key"
         (fact:dat) -> processCommand factFM writer
                             (map toLower fact) cmd (unwords dat)
 

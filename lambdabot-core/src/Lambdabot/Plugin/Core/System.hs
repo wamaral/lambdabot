@@ -43,91 +43,90 @@ systemPlugin = newModule
         writeMS (initial, max d (diffClockTimes now initial))
     
     , moduleCmds = return $
-        [ (command "listchans")
-            { help = say "Show channels bot has joined"
-            , process = \_ -> listKeys (M.mapKeysMonotonic (FreenodeNick . getCN) . ircChannels)
-            }
-        , (command "listmodules")
+        [ (command "listmodules")
             { help = say "listmodules. Show available plugins"
             , process = \_ -> say . showClean =<< lb listModules
             }
-        , (command "listservers")
-            { help = say "listservers. Show current servers"
-            , process = \_ -> listKeys ircServerMap
-            }
+        -- , (command "listchans")
+        --     { help = say "Show channels bot has joined"
+        --     , process = \_ -> listKeys (M.mapKeysMonotonic (FreenodeNick . getCN) . ircChannels)
+        --     }
+        -- , (command "listservers")
+        --     { help = say "listservers. Show current servers"
+        --     , process = \_ -> listKeys ircServerMap
+        --     }
         , (command "list")
             { help = say "list [module|command]. Show commands for [module] or the module providing [command]."
             , process = doList
             }
-        , (command "echo")
-            { help = say "echo <msg>. echo irc protocol string"
-            , process = doEcho
-            }
-        , (command "uptime")
-            { help = say "uptime. Show uptime"
-            , process = \_ -> do
-                (uptime, maxUptime) <- lift getUptime
-                say ("uptime: "           ++ timeDiffPretty uptime ++
-                     ", longest uptime: " ++ timeDiffPretty maxUptime)
-            }
+        -- , (command "echo")
+        --     { help = say "echo <msg>. echo irc protocol string"
+        --     , process = doEcho
+        --     }
+        -- , (command "uptime")
+        --     { help = say "uptime. Show uptime"
+        --     , process = \_ -> do
+        --         (uptime, maxUptime) <- lift getUptime
+        --         say ("uptime: "           ++ timeDiffPretty uptime ++
+        --              ", longest uptime: " ++ timeDiffPretty maxUptime)
+        --     }
         
         , (command "listall")
             { privileged = True
             , help = say "list all commands"
             , process = \_ -> mapM_ doList =<< lb listModules
             }
-        , (command "join")
-            { privileged = True
-            , help = say "join <channel>"
-            , process = \rest -> do
-                logCmd "join" rest
-                chan <- readNick rest
-                lb $ send (joinChannel chan)
-            }
-        , (command "part")
-            { privileged = True
-            , help = say "part <channel>"
-            , aliases = ["leave"]
-            , process = \rest -> do
-                logCmd "part" rest
-                chan <- readNick rest
-                lb $ send (partChannel chan)
-            }
-        , (command "msg")
-            { privileged = True
-            , help = say "msg <nick or channel> <msg>"
-            , process = \rest -> do
-                -- writes to another location:
-                let (tgt, txt) = splitFirstWord rest
-                tgtNick <- readNick tgt
-                lb $ ircPrivmsg tgtNick txt
-            }
-        , (command "codepage")
-            { privileged = True
-            , help = say "codepage <server> <CP-name>"
-            , process = \rest -> do
-                let (server, cp) = splitFirstWord rest
-                lb $ ircCodepage server cp
-            }
-        , (command "quit")
-            { privileged = True
-            , help = say "quit [msg], have the bot exit with msg"
-            , process = \rest -> do
-                server <- getServer
-                lb (ircQuit server $ if null rest then "requested" else rest)
-            }
-        , (command "disconnect")
-            { privileged = True
-            , help = say "disconnect <server> [msg], disconnect from a server with msg"
-            , process = \rest -> do
-                let (server, msg) = splitFirstWord rest
-                lb (ircQuit server $ if null msg then "requested" else msg)
-            }
+        -- , (command "join")
+        --     { privileged = True
+        --     , help = say "join <channel>"
+        --     , process = \rest -> do
+        --         logCmd "join" rest
+        --         chan <- readNick rest
+        --         lb $ send (joinChannel chan)
+        --     }
+        -- , (command "part")
+        --     { privileged = True
+        --     , help = say "part <channel>"
+        --     , aliases = ["leave"]
+        --     , process = \rest -> do
+        --         logCmd "part" rest
+        --         chan <- readNick rest
+        --         lb $ send (partChannel chan)
+        --     }
+        -- , (command "msg")
+        --     { privileged = True
+        --     , help = say "msg <nick or channel> <msg>"
+        --     , process = \rest -> do
+        --         -- writes to another location:
+        --         let (tgt, txt) = splitFirstWord rest
+        --         tgtNick <- readNick tgt
+        --         lb $ ircPrivmsg tgtNick txt
+        --     }
+        -- , (command "codepage")
+        --     { privileged = True
+        --     , help = say "codepage <server> <CP-name>"
+        --     , process = \rest -> do
+        --         let (server, cp) = splitFirstWord rest
+        --         lb $ ircCodepage server cp
+        --     }
+        -- , (command "quit")
+        --     { privileged = True
+        --     , help = say "quit [msg], have the bot exit with msg"
+        --     , process = \rest -> do
+        --         server <- getServer
+        --         lb (ircQuit server $ if null rest then "requested" else rest)
+        --     }
+        -- , (command "disconnect")
+        --     { privileged = True
+        --     , help = say "disconnect <server> [msg], disconnect from a server with msg"
+        --     , process = \rest -> do
+        --         let (server, msg) = splitFirstWord rest
+        --         lb (ircQuit server $ if null msg then "requested" else msg)
+        --     }
         , (command "flush")
             { privileged = True
             , help = say "flush. flush state to disk"
             , process = \_ -> lb (withAllModules writeGlobalState)
-                
             }
         , (command "admin")
             { privileged = True
@@ -141,13 +140,13 @@ systemPlugin = newModule
             , help = say "ignore [+|-] nick. change a user's ignore status."
             , process = doIgnore
             }
-        , (command "reconnect")
-            { privileged = True
-            , help = say "reconnect to server"
-            , process = \rest -> do
-                server <- getServer
-                lb (ircReconnect server $ if null rest then "reconnect requested" else rest)
-            }
+        -- , (command "reconnect")
+        --     { privileged = True
+        --     , help = say "reconnect to server"
+        --     , process = \rest -> do
+        --         server <- getServer
+        --         lb (ircReconnect server $ if null rest then "reconnect requested" else rest)
+        --     }
         ]
     }
 
@@ -157,10 +156,10 @@ logCmd :: String -> String -> Cmd System ()
 logCmd cmd rest = do
     sender <- getSender
     when (sender /= Nick "offlinerc" "null") $
-        noticeM $ "[" ++ fmtNick "" sender ++ "] @" ++ cmd ++ " " ++ rest
+        noticeM $ "[" ++ fmtNick "" sender ++ "] !" ++ cmd ++ " " ++ rest
 
 doList :: String -> Cmd System ()
-doList "" = say "What module?  Try @listmodules for some ideas."
+doList "" = say "What module?  Try !listmodules for some ideas."
 doList m  = say =<< lb (listModule m)
 
 doEcho :: String -> Cmd System ()

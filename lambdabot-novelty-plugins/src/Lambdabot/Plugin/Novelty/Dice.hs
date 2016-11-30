@@ -17,7 +17,7 @@ dicePlugin = newModule
     { moduleCmds = return
         [ (command "dice")
             { aliases = ["roll"]
-            , help = say "@dice <expr>. Throw random dice. <expr> is of the form 3d6+2."
+            , help = say "!dice <expr>. Throw random dice. <expr> is of the form 3d6+2."
             , process = doDice True
             }
         ]
@@ -26,14 +26,15 @@ dicePlugin = newModule
 
 doDice :: Bool -> String -> Cmd Dice ()
 doDice printErrs text = do
-    user <- showNick =<< getSender
+    -- user <- showNick =<< getSender
     result <- io (rollEm text)
     case result of
         Left err    -> if printErrs
             then say (trimError err)
             else return ()
         Right str   -> 
-            say (limitStr 75 (user ++ ": " ++ str))
+            -- say (limitStr 75 (user ++ ": " ++ str))
+            say (limitStr 75 str)
     
     where
         trimError = concat . intersperse ": " . tail . lines . show
