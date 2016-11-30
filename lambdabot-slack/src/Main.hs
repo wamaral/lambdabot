@@ -54,7 +54,7 @@ mkSlackConfig :: String -> SlackConfig
 mkSlackConfig apiToken = SlackConfig { _slackApiToken = apiToken }
 
 isCommand :: String -> Bool
-isCommand cmd = any (\c -> c `isPrefixOf` cmd) ["!", "?", "|"]
+isCommand cmd = any (\c -> c `isPrefixOf` cmd) ["!", "="]
 
 getCommand :: String -> Maybe String
 getCommand cmd = if isCommand cmd then Just cmd else Nothing

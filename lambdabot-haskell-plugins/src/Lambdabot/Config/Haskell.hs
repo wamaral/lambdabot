@@ -18,7 +18,7 @@ module Lambdabot.Config.Haskell
 
 import Lambdabot.Config
 
-config "evalPrefixes"       [t| [String]                |] [| ["|"]         |]
+config "evalPrefixes"       [t| [String]                |] [| ["="]         |]
 
 trustedPkgs :: [String]
 trustedPkgs =
