@@ -32,8 +32,9 @@ offlineRCPlugin :: Module OfflineRCState
 offlineRCPlugin = newModule
     { moduleDefState = return 0
     , moduleInit = do
+        adm <- getConfig adminUser
         lb . modify $ \s -> s
-            { ircPrivilegedUsers = S.insert (Nick "offlinerc" "null") (ircPrivilegedUsers s)
+            { ircPrivilegedUsers = S.insert (Nick "offlinerc" adm) (ircPrivilegedUsers s)
             }
         
         void . fork $ do
@@ -69,15 +70,15 @@ offlineRCPlugin = newModule
 feed :: String -> OfflineRC ()
 feed msg = do
     cmdPrefix <- fmap head (getConfig commandPrefixes)
+    reqUser <- getConfig requestingUser
     let msg' = case msg of
             '=':xs -> cmdPrefix ++ "run " ++ xs
-            -- '!':xs -> xs
             _      -> cmdPrefix ++ dropWhile (== ' ') msg
     -- note that `msg'` is unicode, but lambdabot wants utf-8 lists of bytes
     lb . void . timeout (15 * 1000 * 1000) . received $
               IrcMessage { ircMsgServer = "offlinerc"
                          , ircMsgLBName = "offline"
-                         , ircMsgPrefix = "null!n=user@null"
+                         , ircMsgPrefix = reqUser ++ "!n=user@null"
                          , ircMsgCommand = "PRIVMSG"
                          , ircMsgParams = ["offline", ":" ++ encodeString msg' ] }
 

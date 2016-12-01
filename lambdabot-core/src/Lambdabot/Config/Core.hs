@@ -4,6 +4,8 @@
 {-# OPTIONS_GHC -fno-warn-overlapping-patterns #-}
 module Lambdabot.Config.Core
     ( commandPrefixes
+    , adminUser
+    , requestingUser
     , disabledCommands
     , editDistanceLimit
     , enableInsults
@@ -13,7 +15,6 @@ module Lambdabot.Config.Core
     , lbVersion
     , textWidth
     , uncaughtExceptionHandler
-    
     , replaceRootLogger
     , lbRootLoggerPath
     , consoleLogHandle
@@ -32,6 +33,8 @@ import Data.Version
 -- Core configuration variables
 
 config "commandPrefixes"    [t| [String]                |] [| ["!", "?"]    |]
+config "adminUser"          [t| String                  |] [| ""            |]
+config "requestingUser"     [t| String                  |] [| "anonymous"   |]
 config "disabledCommands"   [t| [String]                |] [| []            |]
 config "editDistanceLimit"  [t| Int                     |] [| 3 :: Int      |]
 config "enableInsults"      [t| Bool                    |] [| True          |]
