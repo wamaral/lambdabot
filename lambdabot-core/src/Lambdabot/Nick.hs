@@ -28,12 +28,15 @@ instance Ord Nick where
   (Nick tag name) <= (Nick tag2 name2) =
      (tag, canonicalizeName name) <= (tag2, canonicalizeName name2)
 
+slackNick :: String -> String
+slackNick n = "<@" ++ n ++ ">"
+
 -- | Format a nickname for display.  This will automatically omit the server
 -- field if it is the same as the server of the provided message.
 fmtNick :: String -> Nick -> String
 fmtNick svr nck
-    | nTag nck == svr = nName nck
-    | otherwise       = nTag nck ++ ':' : nName nck
+    | nTag nck == svr = slackNick (nName nck)
+    | otherwise       = nTag nck ++ ':' : slackNick (nName nck)
 
 -- | Parse a nickname received in a message.  If the server field is not
 -- provided, it defaults to the same as that of the message.
