@@ -26,15 +26,14 @@ dicePlugin = newModule
 
 doDice :: Bool -> String -> Cmd Dice ()
 doDice printErrs text = do
-    -- user <- showNick =<< getSender
+    user <- showNick =<< getSender
     result <- io (rollEm text)
     case result of
         Left err    -> if printErrs
             then say (trimError err)
             else return ()
         Right str   -> 
-            -- say (limitStr 75 (user ++ ": " ++ str))
-            say (limitStr 75 str)
+            say (limitStr 75 (user ++ ": " ++ str))
     
     where
         trimError = concat . intersperse ": " . tail . lines . show
