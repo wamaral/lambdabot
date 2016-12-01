@@ -43,7 +43,7 @@ config "outputDir"          [t| FilePath                |] [| "State/"      |]
 -- the dataDir variable will be filled by lambdabot's executable
 config "dataDir"            [t| FilePath                |] [| "."           |]
 -- ditto for lbVersion
-config "lbVersion"          [t| Version                 |] [| Version [] [] |]
+config "lbVersion"          [t| Version                 |] [| Version [5,1] ["wamaral"] |]
 
 -- IRC maximum msg length, minus a bit for safety.
 config "textWidth"          [t| Int                     |] [| 2000 :: Int    |]

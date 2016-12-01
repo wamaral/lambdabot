@@ -17,7 +17,7 @@ versionPlugin = newModule
             , process = const $ do
                 ver <- getConfig lbVersion
                 say $ "lambdabot " ++ showVersion ver
-                say "git clone https://github.com/lambdabot/lambdabot"
+                say "git clone https://github.com/wamaral/lambdabot"
             }
         ]
     }
