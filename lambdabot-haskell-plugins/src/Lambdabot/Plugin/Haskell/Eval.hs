@@ -88,9 +88,10 @@ runGHC src = do
                 e = mungeEnc err
             return $ case () of {_
                 | null o && null e -> "Terminated\n"
-                | null o           -> e
-                | otherwise        -> o
+                | null o           -> formatOutput e
+                | otherwise        -> formatOutput o
             }
+  where formatOutput str = "> " ++ src ++ "\n" ++ str
 
 ------------------------------------------------------------------------
 -- define a new binding
